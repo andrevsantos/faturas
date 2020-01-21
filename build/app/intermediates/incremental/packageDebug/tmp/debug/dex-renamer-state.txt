@@ -1,0 +1,4 @@
+#Tue Jan 21 23:37:18 WET 2020
+base.0=/home/dekas/Documents/Faturas/faturas/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
