@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/dekas/Documents/Faturas/faturas/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-iw/values-iw.xml",
+            "outputFile": "/home/dekas/Documents/faturas/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-iw/values-iw.xml",
             "map": [
                 {
                     "source": "/home/dekas/.gradle/caches/transforms-2/files-2.1/0a271e99b6771ad4a84318244d532fb7/core-1.0.0/res/values-iw/values-iw.xml",

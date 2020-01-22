@@ -1,4 +1,4 @@
-#Sat Jan 18 19:42:47 WET 2020
-base.0=/home/dekas/Documents/Faturas/faturas/build/app/intermediates/transforms/r8/release/0/classes.dex
+#Wed Jan 22 00:12:53 WET 2020
+base.0=/home/dekas/Documents/faturas/build/app/intermediates/transforms/r8/release/0/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
