@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './screens/faturas.dart';
 import './screens/home.dart';
@@ -21,23 +22,18 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-            color: Colors.black,
+          title: Text(
+            'App Faturas',
+            style: TextStyle(color: Colors.white),
           ),
           actions: <Widget>[
             IconButton(
               onPressed: () {},
               icon: Icon(Icons.search),
-              color: Colors.black,
             )
           ],
-          title: Text(
-            'Fatura-On',
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.white,
+          //elevation:defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
+          backgroundColor: Colors.amber,
         ),
         body: _pageOptions[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
@@ -54,7 +50,7 @@ class MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.blue,
+                  color: Colors.amber,
                   size: 26.0,
                 ),
                 title: Text(
@@ -63,7 +59,7 @@ class MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.account_balance,
-                  color: Colors.blue,
+                  color: Colors.amber,
                   size: 26.0,
                 ),
                 title: Text(
@@ -72,13 +68,48 @@ class MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  color: Colors.blue,
+                  color: Colors.amber,
                   size: 26.0,
                 ),
                 title: Text(
                   '',
                 )),
           ],
+        ),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                ),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
