@@ -30,7 +30,11 @@ class MyAppState extends State<MyApp> {
             IconButton(
               onPressed: () {},
               icon: Icon(Icons.search),
-            )
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.more_vert),
+            ),
           ],
           //elevation:defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
           backgroundColor: Colors.amber,
@@ -85,13 +89,14 @@ class MyAppState extends State<MyApp> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
-                child: Text('Drawer Header'),
+                child: Text('André Vieira dos Santos'),
                 decoration: BoxDecoration(
                   color: Colors.amber,
                 ),
               ),
               ListTile(
-                title: Text('Item 1'),
+                leading: Icon(Icons.shopping_cart),
+                title: Text('Shop'),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -100,7 +105,8 @@ class MyAppState extends State<MyApp> {
                 },
               ),
               ListTile(
-                title: Text('Item 2'),
+                leading: Icon(Icons.account_circle),
+                title: Text('About me'),
                 onTap: () {
                   // Update the state of the app
                   // ...
