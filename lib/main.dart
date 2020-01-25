@@ -1,122 +1,81 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import './screens/faturas.dart';
-import './screens/home.dart';
-import './screens/settings.dart';
+import 'dart:async';
 
-void main() => runApp(MyApp());
+import 'package:faturas/screens/home_page.dart';
+import 'package:flutter/material.dart';
+
+void main() => runApp(MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MyAppState();
-  }
+  SplashScreen createState() => SplashScreen();
 }
 
-class MyAppState extends State<MyApp> {
-  int _selectedPage = 0;
-  final _pageOptions = [HomePage(), FaturasPage(), SettingsPage()];
+class SplashScreen extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainHome(),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'App Faturas',
-            style: TextStyle(color: Colors.white),
+      home: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(color: Colors.blueAccent),
           ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            ),
-          ],
-          //elevation:defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
-          backgroundColor: Colors.amber,
-        ),
-        body: _pageOptions[_selectedPage],
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          currentIndex: _selectedPage,
-          onTap: (int index) {
-            setState(() {
-              _selectedPage = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.amber,
-                  size: 26.0,
-                ),
-                title: Text(
-                  '',
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.account_balance,
-                  color: Colors.amber,
-                  size: 26.0,
-                ),
-                title: Text(
-                  '',
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.amber,
-                  size: 26.0,
-                ),
-                title: Text(
-                  '',
-                )),
-          ],
-        ),
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              DrawerHeader(
-                child: Text('André Vieira dos Santos'),
-                decoration: BoxDecoration(
-                  color: Colors.amber,
+              Expanded(
+                flex: 2,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 50.0,
+                        child: Icon(
+                          Icons.insert_drive_file,
+                          color: Colors.blueGrey,
+                          size: 50.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.0),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              ListTile(
-                leading: Icon(Icons.shopping_cart),
-                title: Text('Shop'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.account_circle),
-                title: Text('About me'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.blue),
+                      backgroundColor: Colors.white,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                    ),
+                  ],
+                ),
+              )
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }
