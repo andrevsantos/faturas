@@ -1,4 +1,5 @@
 import 'package:faturas/screens/settings.dart';
+import 'package:faturas/screens/users.dart';
 import 'package:flutter/material.dart';
 
 import 'faturas.dart';
@@ -17,23 +18,24 @@ class MyAppState extends State<MainHome> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'App Faturas',
-            style: TextStyle(color: Colors.white),
-          ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.search),
+            title: Text(
+              'App Faturas',
+              style: TextStyle(color: Colors.white),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            ),
-          ],
-          //elevation:defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
-          backgroundColor: Colors.grey,
-        ),
+            actions: <Widget>[
+              IconButton(
+                onPressed: () {
+                  showSearch(context: context, delegate: DataSearch());
+                },
+                icon: Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              ),
+            ],
+            //elevation:defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
+            backgroundColor: Colors.lightBlue),
         body: _pageOptions[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
@@ -49,7 +51,7 @@ class MyAppState extends State<MainHome> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.grey,
+                  color: Colors.lightBlue,
                   size: 26.0,
                 ),
                 title: Text(
@@ -58,7 +60,7 @@ class MyAppState extends State<MainHome> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.account_balance,
-                  color: Colors.grey,
+                  color: Colors.lightBlue,
                   size: 26.0,
                 ),
                 title: Text(
@@ -67,7 +69,7 @@ class MyAppState extends State<MainHome> {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
-                  color: Colors.grey,
+                  color: Colors.lightBlue,
                   size: 26.0,
                 ),
                 title: Text(
@@ -86,7 +88,7 @@ class MyAppState extends State<MainHome> {
               DrawerHeader(
                 child: Text('André Vieira dos Santos'),
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.lightBlue,
                 ),
               ),
               ListTile(
@@ -114,5 +116,39 @@ class MyAppState extends State<MainHome> {
         ),
       ),
     );
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {},
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {},
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return ListView.builder(itemBuilder: (context,index)=> ListTile(
+      leading: Icon(Icons.location_city),
+    ),); 
   }
 }

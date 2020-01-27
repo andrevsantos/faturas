@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:random_color/random_color.dart';
 
 class UsersPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => new _UsersLister();
 }
 
-class _UsersLister extends State<UsersPage> {
-  Future<List<User>> _getUsers() async {
+
+RandomColor _randomColor = RandomColor();
+var _refreshKey = GlobalKey<RefreshIndicatorState>();
+
+ class _UsersLister extends State<UsersPage> {
+  static Future<List<User>> _getUsers() async {
+    _refreshKey.currentState?.show();
     var data = await http
         .get('http://www.json-generator.com/api/json/get/bOpFFcoowO?indent=2');
     var jsonData = json.decode(data.body);
@@ -25,7 +31,10 @@ class _UsersLister extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Container(
+        body: RefreshIndicator(
+      key: _refreshKey,
+      onRefresh: _getUsers,
+      child: Container(
         child: FutureBuilder(
           future: _getUsers(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -40,13 +49,24 @@ class _UsersLister extends State<UsersPage> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      snapshot.data[index].picture
+                    leading: InkWell(
+                      onLongPress: () => print("image clicked"),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.lightBlue,
+                        child: Text(
+                          snapshot.data[index].name[0],
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0,
+                              color: Colors.white),
+                        ),
+                      ),
                     ),
-                  ),
                     title: Text(snapshot.data[index].name),
-                    subtitle: Text(snapshot.data[index].fatura,style: TextStyle(color: Colors.grey),),
+                    subtitle: Text(
+                      snapshot.data[index].fatura,
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   );
                 },
               );
@@ -54,7 +74,7 @@ class _UsersLister extends State<UsersPage> {
           },
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -64,5 +84,5 @@ class User {
   final String id;
   final String name;
 
-  User(this.fatura, this.picture,this.id, this.name);
+  User(this.fatura, this.picture, this.id, this.name);
 }

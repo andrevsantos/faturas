@@ -122,6 +122,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "random_color",
+      "rootUri": "file:///usr/local/flutter/.pub-cache/hosted/pub.dartlang.org/random_color-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///usr/local/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -188,7 +194,7 @@
       "languageVersion": "2.2"
     }
   ],
-  "generated": "2020-01-24T00:47:18.982488Z",
+  "generated": "2020-01-27T20:50:56.292963Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }
