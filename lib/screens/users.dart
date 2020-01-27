@@ -6,15 +6,15 @@ import 'package:random_color/random_color.dart';
 
 class UsersPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _UsersLister();
+  State<StatefulWidget> createState() => new UsersLister();
 }
 
 
 RandomColor _randomColor = RandomColor();
 var _refreshKey = GlobalKey<RefreshIndicatorState>();
 
- class _UsersLister extends State<UsersPage> {
-  static Future<List<User>> _getUsers() async {
+ class UsersLister extends State<UsersPage> {
+  static Future<List<User>> getUsers() async {
     _refreshKey.currentState?.show();
     var data = await http
         .get('http://www.json-generator.com/api/json/get/bOpFFcoowO?indent=2');
@@ -33,10 +33,10 @@ var _refreshKey = GlobalKey<RefreshIndicatorState>();
     return new Scaffold(
         body: RefreshIndicator(
       key: _refreshKey,
-      onRefresh: _getUsers,
+      onRefresh: getUsers,
       child: Container(
         child: FutureBuilder(
-          future: _getUsers(),
+          future: getUsers(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return Container(
